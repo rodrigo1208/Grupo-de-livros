@@ -1,0 +1,54 @@
+<br><br><br>
+<div class="panel panel-default col-md-6 col-md-offset-3">
+    <div class="panel-heading">
+        <h3 class="text-center">Novo usuário</h3>
+    </div>
+    <div class="panel-body">
+        <form [formGroup]="cadastroForm" >
+            <div class="form-group">
+                <label>Nome</label>
+                <input 
+                    type="text" 
+                    [(ngModel)]="usuario.primeiroNome"
+                    class="form-control"
+                    formControlName="nome">
+            </div>
+            <div class="form-group">
+                <label>Sobrenome</label>
+                <input 
+                    type="text" 
+                    [(ngModel)]="usuario.sobreNome"
+                    class="form-control"
+                    formControlName="sobrenome">
+            </div>
+            <div class="form-group">
+                <label>Login</label>
+                <input 
+                    type="text" 
+                    [(ngModel)]="usuario.login"
+                    class="form-control"
+                    formControlName="login">
+            </div>
+            <div class="form-group">
+                <label>Senha</label>
+                <input 
+                    type="text"
+                    [(ngModel)]="usuario.senha"
+                    class="form-control"
+                    formControlName="senha">
+            </div>
+            <div class="form-group">
+                <label>Repetir senha</label>
+                <input 
+                    type="text" 
+                    [(ngModel)]="resenha"
+                    class="form-control"
+                    formControlName="resenha">
+            </div>
+        </form>
+        <div>
+            <button class="btn btn-default col-sm-6">Salvar</button>
+            <button class="btn btn-default col-sm-6">Cancelar</button>
+        </div>
+    </div>
+</div>

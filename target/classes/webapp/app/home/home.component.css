@@ -1,0 +1,15 @@
+.my-nav {
+    background-color: steelblue;
+}
+.my-nav-list {
+    color: white;
+}
+.my-nav-list:hover {
+    background-color: dimgray;
+}
+footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:60px;   /* Height of the footer */
+}

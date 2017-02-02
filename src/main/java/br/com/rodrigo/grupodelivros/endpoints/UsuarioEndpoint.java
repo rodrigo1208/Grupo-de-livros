@@ -16,7 +16,7 @@ public class UsuarioEndpoint implements IEndpoints {
 	@Override
 	public void publish() {
 		
-		post("/novoUsuario", "application/json", (req, res) -> {
+		post("/api/usuario/", "application/json", (req, res) -> {
 			Usuario usuario = fromJson(req.body(), Usuario.class);
 			usuarioService.salva(usuario);
 			return "tudo certo";
