@@ -1,15 +1,29 @@
+.app{
+    height: 100%;
+}
+
 .my-nav {
     background-color: steelblue;
 }
 .my-nav-list {
+    cursor: hand;
     color: white;
 }
 .my-nav-list:hover {
     background-color: dimgray;
 }
-footer{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:60px;   /* Height of the footer */
+
+.foot{
+    width: 100%;
+    height: 60px;
+    position: relative;
+    bottom: 0px;
+    clear: both;
+}
+
+.wrapper{
+    min-height: calc(100% - 120px);
+    min-height: -webkit-calc(100% - 120px);
+    min-height: -moz-calc(100% - 120px);
+    position: relative;
 }

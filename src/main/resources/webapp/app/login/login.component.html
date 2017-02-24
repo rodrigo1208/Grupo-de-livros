@@ -7,16 +7,24 @@
         <form>
             <div class="form-group">
                 <label>Login</label>
-                <input type="text" class="form-control">
+                <input
+                    name="login" 
+                    [(ngModel)]="login" 
+                    type="text" 
+                    class="form-control">
             </div>
             <br>
             <div class="form-group">
                 <label>Senha</label>
-                <input type="password" class="form-control">
+                <input 
+                    name="senha"
+                    [(ngModel)]="senha" 
+                    type="password" 
+                    class="form-control">
             </div>
         </form>
         <div class="col-sm-6">
-            <button class="btn btn-default col-sm-12">Entrar</button>
+            <button (click)="authUsuario()" class="btn btn-default col-sm-12">Entrar</button>
         </div>
         <div class="col-sm-6">
             <button (click)="goToCadastro()" class="btn btn-default col-sm-12">Cadastrar novo usuário</button>

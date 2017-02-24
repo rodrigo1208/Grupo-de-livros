@@ -9,9 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var HomeComponent = (function () {
-    function HomeComponent() {
+    function HomeComponent(router) {
+        this.router = router;
     }
+    HomeComponent.prototype.ngOnInit = function () {
+        this.usuario = JSON.parse(localStorage.getItem('currentUser'));
+    };
+    HomeComponent.prototype.logOut = function () {
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/login']);
+    };
     HomeComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -19,7 +28,7 @@ var HomeComponent = (function () {
             templateUrl: './home.component.html',
             styleUrls: ['./home.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], HomeComponent);
     return HomeComponent;
 }());

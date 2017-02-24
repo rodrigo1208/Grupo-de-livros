@@ -7,6 +7,13 @@ import { Component, Input } from '@angular/core'
 })
 export class UsuarioComponent{
 
+    id: {
+        timestamp: any,
+        machineIdentifier: any,
+        processIdentifier: any,
+        counter: any
+     };
+    
     @Input() primeiroNome: string;
     @Input() sobreNome: string;
     @Input() login: string;

@@ -2,11 +2,12 @@ package br.com.rodrigo.grupodelivros.service;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 
 import br.com.rodrigo.grupodelivros.models.Entidade;
 
-public class AbstractService implements IServices{
+public class AbstractService implements IServices {
 
 	
 	protected Datastore datastore;
@@ -21,8 +22,8 @@ public class AbstractService implements IServices{
 	}
 
 	@Override
-	public Object getById(Entidade e) {
-		return datastore.find(e.getClass()).filter("id", e.getId());
+	public Object getById(Class<?> clazz, ObjectId id) {
+		return datastore.find(clazz).filter("_id", id).get();
 	}
 
 	@Override
@@ -35,5 +36,6 @@ public class AbstractService implements IServices{
 		datastore.find(e.getClass());
 		return null;
 	}
+
 
 }

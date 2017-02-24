@@ -9,16 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var livro_component_1 = require('../livro/livro.component');
 var FeedComponent = (function () {
     function FeedComponent() {
-        this.livro = new livro_component_1.LivroComponent();
-        this.livro.autor = 'Frank Herbert';
-        this.livro.url = 'http://www.pontozero.net.br/wp-content/uploads/2013/08/duna-capa.jpg';
-        this.livro.titulo = 'Duna';
-        this.livro.paginas = '180';
-        this.livro.categoria = 'ficção-cientifica';
-        this.livro.nota = 10;
     }
     FeedComponent = __decorate([
         core_1.Component({

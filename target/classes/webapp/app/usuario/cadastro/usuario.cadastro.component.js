@@ -38,6 +38,9 @@ var UsuarioCadastroComponent = (function () {
             _this.router.navigate(['/login']);
         }, function (error) { return console.log(error); });
     };
+    UsuarioCadastroComponent.prototype.cancela = function () {
+        this.router.navigate(['/']);
+    };
     UsuarioCadastroComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

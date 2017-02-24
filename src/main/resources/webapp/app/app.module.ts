@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { LoginModule } from './login/login.module';
 import { AppComponent }  from './app.component';
+import { FotoModule } from './foto/foto.module';
 import { LivroModule } from './livro/livro.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { FeedModule } from './feed/feed.module';
@@ -18,6 +19,7 @@ import { AuthGuard } from './_guards/auth.guards';
     BrowserModule,
     HttpModule,
     routing,
+    FotoModule,
     LivroModule,
     UsuarioModule,
     LoginModule,

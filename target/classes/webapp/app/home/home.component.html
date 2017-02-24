@@ -1,42 +1,59 @@
-<nav class="navbar my-nav">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button"
-            class="navbar-toggle collapsed"
-            data-toggle="collapse"
-             data-target="#my-nav"
-            aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand my-nav-list" >Livros</a>
-        </div>
-        <div class="collapse navbar-collapse" id="my-nav">
-            <ul class="nav navbar-nav">
-                <form class="navbar-form navbar-left">
-                    <div class="input-group">
-                    <input type="text" class="form-control" aria-label="...">
-                    <div class="input-group-btn">
-                        <!-- Buttons -->
+<div class="app">
+    <nav class="navbar my-nav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button"
+                class="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#my-nav"
+                aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a [routerLink]="['/']" class="navbar-brand my-nav-list" >Livros</a>
+            </div>
+            <div class="collapse navbar-collapse" id="my-nav">
+                <ul class="nav navbar-nav">
+                    <form class="navbar-form navbar-left">
+                        <div class="input-group">
+                        <input type="text" class="form-control" aria-label="...">
+                        <div class="input-group-btn">
+                            <!-- Buttons -->
+                        </div>
                     </div>
-                </div>
-                </form>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a [routerLink]="['/feed']" class="my-nav-list">Meus livros</a></li>
-                <li><a class="my-nav-list">Meus grupos</a></li>
-                <li><a class="my-nav-list">Perfil</a></li>
-            </ul>
+                    </form>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a [routerLink]="['/meus-livros']" class="my-nav-list">Meus livros</a></li>
+                    <li><a class="my-nav-list">Meus grupos</a></li>
+                    <li class="dropdown">
+                        <a  
+                            class="dropdown-toggle my-nav-list" 
+                            data-toggle="dropdown" 
+                            role="button"
+                            aria-haspopup="=true"
+                            aria-expanded="false">
+                            Perfil
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="">Ver perfil</a></li>
+                            <li><a href="" (click)="logOut()">Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </nav>
+
+    <div class="container wrapper">
+        <router-outlet></router-outlet>
     </div>
-</nav>
 
-<div class="container">
-    <router-outlet></router-outlet>
+    <footer class="foot" style="background-color: dimgray;">
+
+    </footer>
+
 </div>
-
-<footer style="height: 50px; background-color: dimgray;">
-
-</footer>

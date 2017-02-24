@@ -1,4 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router';
+import { UsuarioComponent } from '../usuario/usuario.component';
 
 @Component({
     moduleId: module.id,
@@ -6,6 +8,21 @@ import { Component } from '@angular/core'
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
     
+    usuario: UsuarioComponent;
+
+    constructor(private router: Router){  }
+
+    ngOnInit(){
+        this.usuario = JSON.parse(localStorage.getItem('currentUser'));
+    }
+
+
+
+    logOut(){
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/login']);
+    }
+
 }

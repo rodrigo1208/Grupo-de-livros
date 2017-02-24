@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FotoComponent } from '../foto/foto.component';
 
 @Component({
     moduleId: module.id,
@@ -13,6 +14,8 @@ export class LivroComponent{
     @Input() paginas: String;
     @Input() categoria: string;
     @Input() nota: number;
-    avaliacoes: Array<string>
+    avaliacoes: Array<string>;
+
+    foto: FotoComponent;
     
 }

@@ -1,0 +1,20 @@
+<div class="">
+    <br><br>
+    <div>
+        <h3 class="text-center">Meus livros</h3>
+        <h4 [hidden]="semLivros">Você não possui livros</h4>
+        <div class="col-sm-12 ">
+            <button class="btn btn-default " (click)="novoLivro()" >Novo livro</button>
+        </div>
+        <br>
+    </div>
+    <div *ngFor="let livro of livros" class="col-sm-6">
+        <livro 
+            [titulo]="livro.titulo"
+            [url]="livro.foto.imagem"
+            [autor]="livro.autor"
+            [paginas]="livro.paginas"
+            [categoria]="livro.categoria">
+        </livro>
+    </div>
+</div>

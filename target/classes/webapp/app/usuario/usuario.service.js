@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var http_1 = require('@angular/http');
 var core_1 = require('@angular/core');
+require('rxjs/Rx');
 var UsuarioService = (function () {
     function UsuarioService(http) {
         this.url = "/api/usuario/";
@@ -20,6 +21,29 @@ var UsuarioService = (function () {
     UsuarioService.prototype.salva = function (usuario) {
         return this.http
             .post(this.url, JSON.stringify(usuario), { headers: this.headers });
+    };
+    UsuarioService.prototype.getIdUsuarioLogado = function () {
+        return this.http
+            .post(this.url + 'getId/', localStorage.getItem('currentUser'), { headers: this.headers });
+    };
+    UsuarioService.prototype.authUsuario = function (login, senha) {
+        var params = new http_1.URLSearchParams();
+        params.set('login', login);
+        params.set('senha', senha);
+        return this.http
+            .post('/api/auth_login', JSON.stringify({ login: login, senha: senha }), { headers: this.headers })
+            .map(function (response) {
+            console.log(response);
+            var usuario = response.json();
+            console.log(usuario);
+            if (usuario != null) {
+                localStorage.setItem('currentUser', JSON.stringify(usuario));
+                console.log(localStorage.getItem('currentUser'));
+            }
+        });
+    };
+    UsuarioService.prototype.logOut = function () {
+        localStorage.removeItem('currentUser');
     };
     UsuarioService = __decorate([
         core_1.Injectable(), 

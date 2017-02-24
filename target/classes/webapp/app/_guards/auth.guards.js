@@ -16,9 +16,12 @@ var AuthGuard = (function () {
     }
     AuthGuard.prototype.canActivate = function (route, state) {
         if (localStorage.getItem('currentUser')) {
+            console.log('true');
             return true;
         }
+        console.log('false');
         this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        return false;
     };
     AuthGuard = __decorate([
         core_1.Injectable(), 

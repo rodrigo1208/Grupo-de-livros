@@ -1,5 +1,6 @@
 package br.com.rodrigo.grupodelivros.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Entity;
@@ -14,11 +15,11 @@ public class Usuario extends Entidade {
 	private String senha;
 	
 	@Reference
-	private List<Livro> idsLivros;
+	private List<String> idsLivros;
 
 	
 	public Usuario() {
-		// TODO Auto-generated constructor stub
+		idsLivros = new ArrayList<>();
 	}
 	
 	public String getPrimeiroNome() {
@@ -53,11 +54,11 @@ public class Usuario extends Entidade {
 		this.senha = senha;
 	}
 
-	public List<Livro> getIdsLivros() {
+	public List<String> getIdsLivros() {
 		return idsLivros;
 	}
 	
-	public void setIdsLivros(List<Livro> idsLivros) {
+	public void setIdsLivros(List<String> idsLivros) {
 		this.idsLivros = idsLivros;
 	}
 

@@ -1,25 +1,27 @@
 package br.com.rodrigo.grupodelivros.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Reference;
 
 @Entity
-public class Livro {
+public class Livro extends Entidade {
 	
 	private String titulo;
+	private Foto foto;
 	private String autor;
 	private String paginas;
 	private String categoria;
 	private Double nota;
-	private List<String> avaliacoes;
+	private List<Avaliacao> avaliacoes;
 	
 	@Reference
-	private List<Usuario> idsUsuarios;
+	private List<String> idsUsuarios;
 
 	public Livro() {
-		// TODO Auto-generated constructor stub
+		idsUsuarios = new ArrayList<>();
 	}
 
 	public String getTitulo() {
@@ -28,6 +30,14 @@ public class Livro {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
 	}
 
 	public String getAutor() {
@@ -62,20 +72,27 @@ public class Livro {
 		this.nota = nota;
 	}
 
-	public List<String> getAvaliacoes() {
+	public List<Avaliacao> getAvaliacoes() {
 		return avaliacoes;
 	}
 
-	public void setAvaliacoes(List<String> avaliacoes) {
+	public void setAvaliacoes(List<Avaliacao> avaliacoes) {
 		this.avaliacoes = avaliacoes;
 	}
 
-	public List<Usuario> getIdsUsuarios() {
+	public List<String> getIdsUsuarios() {
 		return idsUsuarios;
 	}
 
-	public void setIdsUsuarios(List<Usuario> idsUsuarios) {
+	public void setIdsUsuarios(List<String> idsUsuarios) {
 		this.idsUsuarios = idsUsuarios;
+	}
+
+	@Override
+	public String toString() {
+		return "Livro [titulo=" + titulo + ", foto=" + foto + ", autor=" + autor + ", paginas=" + paginas
+				+ ", categoria=" + categoria + ", nota=" + nota + ", avaliacoes=" + avaliacoes + ", idsUsuarios="
+				+ idsUsuarios + "]";
 	}
 	
 	

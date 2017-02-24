@@ -9,14 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
+var common_1 = require('@angular/common');
 var livro_component_1 = require('./livro.component');
+var livro_cadastro_component_1 = require('./cadastro/livro.cadastro.component');
+var livro_listagem_component_1 = require('./listagem/livro.listagem.component');
+var livro_service_1 = require('./livro.service');
 var LivroModule = (function () {
     function LivroModule() {
     }
     LivroModule = __decorate([
         core_1.NgModule({
-            declarations: [livro_component_1.LivroComponent],
-            exports: [livro_component_1.LivroComponent]
+            imports: [
+                common_1.CommonModule,
+                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule
+            ],
+            declarations: [
+                livro_component_1.LivroComponent,
+                livro_cadastro_component_1.LivroCadastroComponent,
+                livro_listagem_component_1.LivroListagemComponent
+            ],
+            exports: [livro_component_1.LivroComponent],
+            providers: [livro_service_1.LivroService]
         }), 
         __metadata('design:paramtypes', [])
     ], LivroModule);

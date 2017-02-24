@@ -2,17 +2,20 @@ package br.com.rodrigo.grupodelivros;
 
 import static spark.Spark.before;
 import static spark.Spark.staticFileLocation;
-import static spark.Spark.*;
 
+import javax.servlet.MultipartConfigElement;
+
+import br.com.rodrigo.grupodelivros.endpoints.LivroEndpoint;
 import br.com.rodrigo.grupodelivros.endpoints.UsuarioEndpoint;
+import spark.utils.SparkUtils;
 
 public class Initializer {
 	
 	public void init(){
 		staticFileLocation("/webapp");
-		redirect.get("*", "/");
 		configureHeaders();
 		configureEndpoints();
+		
 	}
 	
 	
@@ -28,6 +31,7 @@ public class Initializer {
 	
 	private void configureEndpoints(){
 		new UsuarioEndpoint().publish();
+		new LivroEndpoint().publish();
 	}
 	
 	

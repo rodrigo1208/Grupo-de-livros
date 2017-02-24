@@ -10,10 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var usuario_service_1 = require('../usuario/usuario.service');
 var LoginComponent = (function () {
-    function LoginComponent(router) {
+    function LoginComponent(router, service, route) {
         this.router = router;
+        this.service = service;
+        this.route = route;
     }
+    LoginComponent.prototype.ngOnInit = function () {
+        this.service.logOut();
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    };
+    LoginComponent.prototype.authUsuario = function () {
+        var _this = this;
+        this.service.authUsuario(this.login, this.senha)
+            .subscribe(function (res) {
+            _this.router.navigate([_this.returnUrl]);
+        }, function (error) { return console.log(error); });
+    };
     LoginComponent.prototype.goToCadastro = function () {
         this.router.navigate(['/cadastro']);
     };
@@ -23,7 +37,7 @@ var LoginComponent = (function () {
             selector: 'login',
             templateUrl: './login.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, usuario_service_1.UsuarioService, router_1.ActivatedRoute])
     ], LoginComponent);
     return LoginComponent;
 }());

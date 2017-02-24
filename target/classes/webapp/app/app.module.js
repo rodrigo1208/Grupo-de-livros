@@ -16,6 +16,7 @@ var app_routes_1 = require('./app.routes');
 var home_component_1 = require('./home/home.component');
 var login_module_1 = require('./login/login.module');
 var app_component_1 = require('./app.component');
+var foto_module_1 = require('./foto/foto.module');
 var livro_module_1 = require('./livro/livro.module');
 var usuario_module_1 = require('./usuario/usuario.module');
 var feed_module_1 = require('./feed/feed.module');
@@ -30,6 +31,7 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 app_routes_1.routing,
+                foto_module_1.FotoModule,
                 livro_module_1.LivroModule,
                 usuario_module_1.UsuarioModule,
                 login_module_1.LoginModule,

@@ -44,4 +44,8 @@ export class UsuarioCadastroComponent{
             }, error => console.log(error));
     }
 
+    cancela() {
+        this.router.navigate(['/']);
+    }
+
 }
