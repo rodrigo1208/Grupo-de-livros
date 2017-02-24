@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { FotoComponent } from '../foto/foto.component';
 
 @Component({
@@ -7,7 +8,7 @@ import { FotoComponent } from '../foto/foto.component';
     templateUrl: './livro.component.html'
 })
 export class LivroComponent{
-
+             id: Object;
     @Input() titulo: string;
     @Input() url: string;
     @Input() autor: string;
@@ -17,5 +18,10 @@ export class LivroComponent{
     avaliacoes: Array<string>;
 
     foto: FotoComponent;
-    
+
+    constructor(){
+        this.foto = new FotoComponent();
+    }
+
+
 }

@@ -15,7 +15,7 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'feed', component: FeedComponent },
-            { path: 'novo-livro', component: LivroCadastroComponent },
+            { path: 'novo-livro/:id', component: LivroCadastroComponent },
             { path: 'meus-livros', component: LivroListagemComponent},
         ]
     },

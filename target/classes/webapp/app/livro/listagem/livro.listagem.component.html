@@ -6,7 +6,6 @@
         <div class="col-sm-12 ">
             <button class="btn btn-default " (click)="novoLivro()" >Novo livro</button>
         </div>
-        <br>
     </div>
     <div *ngFor="let livro of livros" class="col-sm-6">
         <livro 
@@ -15,6 +14,10 @@
             [autor]="livro.autor"
             [paginas]="livro.paginas"
             [categoria]="livro.categoria">
+            <span>
+                <button class="btn btn-default" (click)="goToEdicao(livro)" >Editar</button>
+                <button class="btn btn-default">Excluir</button>
+            </span>
         </livro>
     </div>
 </div>

@@ -11,18 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
-var foto_component_1 = require('../../foto/foto.component');
 var livro_component_1 = require('../livro.component');
 var usuario_service_1 = require('../../usuario/usuario.service');
 var livro_service_1 = require('../livro.service');
 var LivroCadastroComponent = (function () {
-    function LivroCadastroComponent(service, uService, fb, router) {
+    function LivroCadastroComponent(service, uService, fb, router, route) {
         this.service = service;
         this.uService = uService;
         this.fb = fb;
         this.router = router;
+        this.route = route;
         this.imgShow = false;
-        this.foto = new foto_component_1.FotoComponent();
+        this.funcao = "Novo";
         this.livro = new livro_component_1.LivroComponent();
         this.cadastroForm = fb.group({
             imagem: [''],
@@ -32,6 +32,22 @@ var LivroCadastroComponent = (function () {
             categoria: ['']
         });
     }
+    LivroCadastroComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.subscribe(function (params) {
+            if (params['id'] <= 0) {
+                return;
+            }
+            _this.funcao = "Editar";
+            _this.service.getLivroPorId(params['id'])
+                .subscribe(function (res) {
+                var livro = res.json();
+                livro.foto.imagem = _this.service.configuraImagemParaExibicao(livro.foto.imagem);
+                _this.livro = livro;
+                _this.imgShow = true;
+            }, function (error) { return console.log(error); });
+        });
+    };
     LivroCadastroComponent.prototype.salva = function () {
         var _this = this;
         this.uService.getIdUsuarioLogado()
@@ -44,7 +60,7 @@ var LivroCadastroComponent = (function () {
                         if (xhr.status == 200 && xhr.status < 300) {
                             console.log('Salvo com sucesso!' + xhr.responseText);
                             _this.livro = new livro_component_1.LivroComponent();
-                            _this.foto = new foto_component_1.FotoComponent();
+                            _this.imgShow = false;
                         }
                     }
                 };
@@ -59,8 +75,8 @@ var LivroCadastroComponent = (function () {
         var file = event.target.files[0];
         var reader = new FileReader();
         reader.onload = function (e) {
-            _this.foto.imagem = e.target.result;
-            _this.foto.nomeImagem = file.name;
+            _this.livro.foto.imagem = e.target.result;
+            _this.livro.foto.nomeImagem = file.name;
         };
         this.imgShow = true;
         this.formData = new FormData();
@@ -73,7 +89,7 @@ var LivroCadastroComponent = (function () {
             selector: 'livro-cadastro',
             templateUrl: './livro.cadastro.component.html'
         }), 
-        __metadata('design:paramtypes', [livro_service_1.LivroService, usuario_service_1.UsuarioService, forms_1.FormBuilder, router_1.Router])
+        __metadata('design:paramtypes', [livro_service_1.LivroService, usuario_service_1.UsuarioService, forms_1.FormBuilder, router_1.Router, router_1.ActivatedRoute])
     ], LivroCadastroComponent);
     return LivroCadastroComponent;
 }());

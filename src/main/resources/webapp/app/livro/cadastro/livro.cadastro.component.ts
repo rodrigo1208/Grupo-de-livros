@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validator } from '@angular/forms'
-import { Router } from '@angular/router';
-import { FotoComponent } from '../../foto/foto.component';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LivroComponent } from '../livro.component';
 import { UsuarioService } from '../../usuario/usuario.service';
 import { LivroService } from '../livro.service';
@@ -11,21 +10,20 @@ import { LivroService } from '../livro.service';
     selector: 'livro-cadastro',
     templateUrl: './livro.cadastro.component.html'
 })
-export class LivroCadastroComponent {
+export class LivroCadastroComponent implements OnInit {
 
-    foto: FotoComponent;
     livro: LivroComponent;
     cadastroForm: FormGroup;
     formData: FormData;
     imgShow: boolean = false;
+    funcao: string = "Novo"
 
     constructor(
             private service: LivroService,
             private uService: UsuarioService,
             private fb: FormBuilder,
-            private router: Router){
-
-        this.foto = new FotoComponent();
+            private router: Router,
+            private route: ActivatedRoute){
         this.livro = new LivroComponent();
         this.cadastroForm = fb.group({
             imagem: [''],
@@ -34,6 +32,25 @@ export class LivroCadastroComponent {
             paginas: [''],
             categoria: ['']
         });
+    }
+
+    ngOnInit(){
+        this.route.params.subscribe(params => {
+            if(params['id'] <= 0){
+                return;
+            }
+
+            this.funcao = "Editar";
+            this.service.getLivroPorId(params['id'])
+                .subscribe(res => {
+                    let livro: LivroComponent = res.json();
+                    livro.foto.imagem = this.service.configuraImagemParaExibicao(livro.foto.imagem);
+                    this.livro = livro;
+                    this.imgShow = true;
+                }, error => console.log(error));
+
+        });
+
     }
 
     salva () {
@@ -47,7 +64,7 @@ export class LivroCadastroComponent {
                                 if(xhr.status == 200 && xhr.status < 300){
                                     console.log('Salvo com sucesso!' + xhr.responseText);
                                     this.livro = new LivroComponent();
-                                    this.foto = new FotoComponent();
+                                    this.imgShow = false;
                                 }
                             }
                         };
@@ -65,8 +82,8 @@ export class LivroCadastroComponent {
         let file = event.target.files[0];
         let reader = new FileReader();
         reader.onload = (e: any) => {
-            this.foto.imagem = e.target.result;
-            this.foto.nomeImagem = file.name;
+            this.livro.foto.imagem = e.target.result;
+            this.livro.foto.nomeImagem = file.name;
         };
 
         this.imgShow = true;

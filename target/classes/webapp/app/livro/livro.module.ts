@@ -15,7 +15,7 @@ import { LivroService } from './livro.service';
     declarations: [ 
         LivroComponent, 
         LivroCadastroComponent,
-        LivroListagemComponent 
+        LivroListagemComponent
     ],
     exports: [ LivroComponent ],
     providers: [ LivroService ]

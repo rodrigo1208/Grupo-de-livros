@@ -14,7 +14,7 @@ var appRoutes = [
         canActivate: [auth_guards_1.AuthGuard],
         children: [
             { path: 'feed', component: feed_component_1.FeedComponent },
-            { path: 'novo-livro', component: livro_cadastro_component_1.LivroCadastroComponent },
+            { path: 'novo-livro/:id', component: livro_cadastro_component_1.LivroCadastroComponent },
             { path: 'meus-livros', component: livro_listagem_component_1.LivroListagemComponent },
         ]
     },

@@ -78,6 +78,17 @@ public class LivroEndpoint  implements IEndpoints{
 			}
 		}, json());
 		
+		get("/api/livro/:id", "application/json", (req, res) -> {
+			try{
+				ObjectId id = fromJson(req.params("id"), ObjectId.class);
+				return service.getById(Livro.class, id);
+			}catch(Exception e){
+				e.printStackTrace();
+				return new RuntimeException();
+			}
+			
+		}, json());
+		
 		get("/api/livros/:id", "application/json" ,(req, res) -> {
 			List<Livro> livrosUsuario = service.getLivrosUsuario(req.params("id"));
 			return livrosUsuario;

@@ -9,8 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var foto_component_1 = require('../foto/foto.component');
 var LivroComponent = (function () {
     function LivroComponent() {
+        this.foto = new foto_component_1.FotoComponent();
     }
     __decorate([
         core_1.Input(), 
