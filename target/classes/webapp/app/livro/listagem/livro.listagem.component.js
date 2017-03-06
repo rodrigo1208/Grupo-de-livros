@@ -56,7 +56,8 @@ var LivroListagemComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'livro-listagem',
-            templateUrl: './livro.listagem.component.html'
+            templateUrl: './livro.listagem.component.html',
+            styleUrls: ['./livro.listagem.component.css']
         }), 
         __metadata('design:paramtypes', [router_1.Router, livro_service_1.LivroService, usuario_service_1.UsuarioService])
     ], LivroListagemComponent);

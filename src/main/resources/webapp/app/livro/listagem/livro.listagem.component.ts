@@ -10,7 +10,8 @@ import { LivroComponent } from '../livro.component';
 @Component({
     moduleId: module.id,
     selector: 'livro-listagem',
-    templateUrl: './livro.listagem.component.html'
+    templateUrl: './livro.listagem.component.html',
+    styleUrls: ['./livro.listagem.component.css']
 })
 export class LivroListagemComponent implements OnInit{
 

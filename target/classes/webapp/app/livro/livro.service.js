@@ -25,7 +25,7 @@ var LivroService = (function () {
     };
     LivroService.prototype.atualizaLivro = function (livro) {
         return this.http
-            .put('/api/livro/' + livro.id, JSON.stringify(livro), { headers: this.headers });
+            .put('/api/livro/', JSON.stringify(livro), { headers: this.headers });
     };
     LivroService.prototype.salvaFoto = function (idRes, formData) {
         console.log("salvando foto");

@@ -45,7 +45,8 @@ var LivroCadastroComponent = (function () {
             _this.service.getLivroPorId(params['id'])
                 .subscribe(function (res) {
                 var livro = res.json();
-                livro.foto.imagem = _this.service.configuraImagemParaExibicao(livro.foto.imagem);
+                _this.foto.imagem = _this.service.configuraImagemParaExibicao(livro.foto.imagem);
+                _this.foto.nomeImagem = livro.foto.nomeImagem;
                 _this.livro = livro;
                 _this.imgShow = true;
             }, function (error) { return console.log(error); });
@@ -61,7 +62,7 @@ var LivroCadastroComponent = (function () {
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4) {
                         if (xhr.status == 200 && xhr.status < 300) {
-                            console.log('Salvo com sucesso!' + xhr.responseText);
+                            console.log('Salvo com sucesso!');
                             _this.livro = new livro_component_1.LivroComponent();
                             _this.imgShow = false;
                         }
@@ -76,21 +77,32 @@ var LivroCadastroComponent = (function () {
             .atualizaLivro(this.livro)
             .subscribe(function (res) {
             if (!_this.imgChanged) {
+                _this.goToMeusLivros();
                 return;
             }
             var xhr = _this.service.salvaFoto(res.json(), _this.formData);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
                     if (xhr.status == 200 && xhr.status < 300) {
-                        console.log('Salvo com sucesso!' + xhr.responseText);
-                        _this.router.navigate(['meus-livros']);
+                        _this.goToMeusLivros();
                     }
                 }
             };
         }, function (error) { return console.log(error); });
     };
-    LivroCadastroComponent.prototype.cancela = function () {
+    LivroCadastroComponent.prototype.goToMeusLivros = function () {
         this.router.navigate(['/meus-livros']);
+    };
+    LivroCadastroComponent.prototype.salvaOuAtualiza = function () {
+        if (this.livro.id == null || this.livro.id == undefined) {
+            this.salva();
+        }
+        else {
+            this.atualiza();
+        }
+    };
+    LivroCadastroComponent.prototype.cancela = function () {
+        this.goToMeusLivros();
     };
     LivroCadastroComponent.prototype.onFileChange = function (event) {
         var _this = this;

@@ -28,7 +28,7 @@ export class LivroService {
     atualizaLivro(livro: LivroComponent): Observable<Response> {
         
         return this.http
-            .put('/api/livro/' + livro.id, JSON.stringify(livro), { headers: this.headers });
+            .put('/api/livro/', JSON.stringify(livro), { headers: this.headers });
     }
 
     salvaFoto(idRes: string, formData: FormData): XMLHttpRequest {

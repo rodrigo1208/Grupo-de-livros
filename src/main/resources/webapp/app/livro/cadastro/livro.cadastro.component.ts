@@ -58,7 +58,7 @@ export class LivroCadastroComponent implements OnInit {
 
     }
 
-    private salva () {
+    private salva () :void {
         this.uService.getIdUsuarioLogado()
             .subscribe(res => {
                  this.service.salvaLivro(this.livro, res.json())
@@ -67,7 +67,7 @@ export class LivroCadastroComponent implements OnInit {
                         xhr.onreadystatechange = () => {
                             if(xhr.readyState === 4){
                                 if(xhr.status == 200 && xhr.status < 300){
-                                    console.log('Salvo com sucesso!' + xhr.responseText);
+                                    console.log('Salvo com sucesso!');
                                     this.livro = new LivroComponent();
                                     this.imgShow = false;
                                 }
@@ -77,27 +77,31 @@ export class LivroCadastroComponent implements OnInit {
             }, error => console.log(error));
     }
 
-    private atualiza() {
+    private atualiza() :void {
         this.service
             .atualizaLivro(this.livro)
             .subscribe(res => {
                 if(!this.imgChanged){
+                    this.goToMeusLivros();
                     return;
                 }
                 let xhr = this.service.salvaFoto(res.json(), this.formData);
                 xhr.onreadystatechange = () => {
                     if(xhr.readyState === 4){
                         if(xhr.status == 200 && xhr.status < 300){
-                            console.log('Salvo com sucesso!' + xhr.responseText);
-                            this.router.navigate(['meus-livros']);
+                            this.goToMeusLivros();
                         }
                     }
                 };
             }, error => console.log(error));
     }
 
+    private goToMeusLivros() :void{
+        this.router.navigate(['/meus-livros']);
+    }
+
     salvaOuAtualiza(){
-        if(this.livro.id != null || this.livro.id != undefined){
+        if(this.livro.id == null || this.livro.id == undefined){
             this.salva();
         } else {
             this.atualiza();
@@ -105,7 +109,7 @@ export class LivroCadastroComponent implements OnInit {
     }
 
     cancela(){
-        this.router.navigate(['/meus-livros']);
+        this.goToMeusLivros();
     }
 
     onFileChange(event: any){

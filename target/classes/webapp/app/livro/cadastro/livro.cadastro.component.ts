@@ -48,7 +48,8 @@ export class LivroCadastroComponent implements OnInit {
             this.service.getLivroPorId(params['id'])
                 .subscribe(res => {
                     let livro: LivroComponent = res.json();
-                    livro.foto.imagem = this.service.configuraImagemParaExibicao(livro.foto.imagem);
+                    this.foto.imagem = this.service.configuraImagemParaExibicao(livro.foto.imagem);
+                    this.foto.nomeImagem = livro.foto.nomeImagem;
                     this.livro = livro;
                     this.imgShow = true;
                 }, error => console.log(error));
@@ -57,7 +58,7 @@ export class LivroCadastroComponent implements OnInit {
 
     }
 
-    salva () {
+    private salva () :void {
         this.uService.getIdUsuarioLogado()
             .subscribe(res => {
                  this.service.salvaLivro(this.livro, res.json())
@@ -66,7 +67,7 @@ export class LivroCadastroComponent implements OnInit {
                         xhr.onreadystatechange = () => {
                             if(xhr.readyState === 4){
                                 if(xhr.status == 200 && xhr.status < 300){
-                                    console.log('Salvo com sucesso!' + xhr.responseText);
+                                    console.log('Salvo com sucesso!');
                                     this.livro = new LivroComponent();
                                     this.imgShow = false;
                                 }
@@ -76,27 +77,39 @@ export class LivroCadastroComponent implements OnInit {
             }, error => console.log(error));
     }
 
-    atualiza() {
+    private atualiza() :void {
         this.service
             .atualizaLivro(this.livro)
             .subscribe(res => {
                 if(!this.imgChanged){
+                    this.goToMeusLivros();
                     return;
                 }
                 let xhr = this.service.salvaFoto(res.json(), this.formData);
                 xhr.onreadystatechange = () => {
                     if(xhr.readyState === 4){
                         if(xhr.status == 200 && xhr.status < 300){
-                            console.log('Salvo com sucesso!' + xhr.responseText);
-                            this.router.navigate(['meus-livros']);
+                            this.goToMeusLivros();
                         }
                     }
                 };
             }, error => console.log(error));
     }
 
-    cancela(){
+    private goToMeusLivros() :void{
         this.router.navigate(['/meus-livros']);
+    }
+
+    salvaOuAtualiza(){
+        if(this.livro.id == null || this.livro.id == undefined){
+            this.salva();
+        } else {
+            this.atualiza();
+        }
+    }
+
+    cancela(){
+        this.goToMeusLivros();
     }
 
     onFileChange(event: any){

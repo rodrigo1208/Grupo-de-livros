@@ -3,11 +3,11 @@
     <div>
         <h3 class="text-center">Meus livros</h3>
         <h4 [hidden]="semLivros">Você não possui livros</h4>
-        <div class="col-sm-12 ">
+        <div class="col-sm-12 botao">
             <button class="btn btn-default " (click)="novoLivro()" >Novo livro</button>
         </div>
     </div>
-    <div *ngFor="let livro of livros" class="col-sm-6">
+    <div *ngFor="let livro of livros" class="col-sm-9 col-sm-offset-1 livro">
         <livro 
             [titulo]="livro.titulo"
             [url]="livro.foto.imagem"
