@@ -25,7 +25,7 @@ var LivroListagemComponent = (function () {
     LivroListagemComponent.prototype.ngOnInit = function () {
     };
     LivroListagemComponent.prototype.goToEdicao = function (livro) {
-        this.router.navigate(['/novo-livro', JSON.stringify(livro.id)]);
+        this.router.navigate(['novo-livro', JSON.stringify(livro.id)]);
     };
     LivroListagemComponent.prototype.mostraMensagens = function () {
         if (this.livros.length > 0) {
@@ -44,7 +44,7 @@ var LivroListagemComponent = (function () {
         }, function (error) { return console.log(error); });
     };
     LivroListagemComponent.prototype.novoLivro = function () {
-        this.router.navigate(['/novo-livro', 0]);
+        this.router.navigate(['novo-livro', 0]);
     };
     LivroListagemComponent.prototype.converteFoto = function (livros) {
         var _this = this;

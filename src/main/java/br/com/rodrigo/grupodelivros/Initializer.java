@@ -1,17 +1,14 @@
 package br.com.rodrigo.grupodelivros;
 
-import static spark.Spark.before;
-import static spark.Spark.staticFileLocation;
-
-import javax.servlet.MultipartConfigElement;
+import static spark.Spark.*;
 
 import br.com.rodrigo.grupodelivros.endpoints.LivroEndpoint;
 import br.com.rodrigo.grupodelivros.endpoints.UsuarioEndpoint;
-import spark.utils.SparkUtils;
 
 public class Initializer {
 	
 	public void init(){
+		
 		staticFileLocation("/webapp");
 		configureHeaders();
 		configureEndpoints();

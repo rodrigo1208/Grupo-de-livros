@@ -23,6 +23,7 @@ public class UsuarioService extends  AbstractService {
 	}
 	
 	public Usuario adicionaLivro(Usuario usuario, String idLivro){
+		System.out.println(idLivro);
 		Query<Usuario> addLivroQuery = datastore.createQuery(Usuario.class).field("_id").equal(usuario.getId());
 		ops = datastore.createUpdateOperations(Usuario.class).push("idsLivros", idLivro);
 		datastore.update(addLivroQuery, ops);

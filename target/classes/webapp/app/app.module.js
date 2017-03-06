@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
 //imports próprios do app
@@ -39,7 +40,8 @@ var AppModule = (function () {
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: [
-                auth_guards_1.AuthGuard
+                auth_guards_1.AuthGuard,
+                { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy }
             ]
         }), 
         __metadata('design:paramtypes', [])

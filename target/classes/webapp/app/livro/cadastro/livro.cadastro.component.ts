@@ -97,7 +97,7 @@ export class LivroCadastroComponent implements OnInit {
     }
 
     private goToMeusLivros() :void{
-        this.router.navigate(['/meus-livros']);
+        this.router.navigate(['meus-livros']);
     }
 
     salvaOuAtualiza(){

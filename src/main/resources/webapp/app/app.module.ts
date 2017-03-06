@@ -1,4 +1,5 @@
 import { NgModule }      from '@angular/core';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 //imports próprios do app
@@ -27,7 +28,8 @@ import { AuthGuard } from './_guards/auth.guards';
    ],
   bootstrap:    [ AppComponent ],
   providers: [  
-    AuthGuard
+    AuthGuard,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ]
 })
 export class AppModule { }

@@ -91,7 +91,7 @@ var LivroCadastroComponent = (function () {
         }, function (error) { return console.log(error); });
     };
     LivroCadastroComponent.prototype.goToMeusLivros = function () {
-        this.router.navigate(['/meus-livros']);
+        this.router.navigate(['meus-livros']);
     };
     LivroCadastroComponent.prototype.salvaOuAtualiza = function () {
         if (this.livro.id == null || this.livro.id == undefined) {

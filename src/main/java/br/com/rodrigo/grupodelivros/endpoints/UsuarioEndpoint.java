@@ -30,7 +30,6 @@ public class UsuarioEndpoint implements IEndpoints {
 			try {
 				
 				Usuario usuario = fromJson(req.body(), Usuario.class);
-				System.out.println(usuario.getId());
 				return usuario.getId().toString();
 				
 			}catch(Exception e){

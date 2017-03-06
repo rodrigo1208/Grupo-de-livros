@@ -28,8 +28,8 @@ export class LivroListagemComponent implements OnInit{
 
     }
 
-    goToEdicao(livro: LivroComponent){
-        this.router.navigate(['/novo-livro', JSON.stringify(livro.id)]);
+    goToEdicao(livro: LivroComponent) {
+        this.router.navigate(['novo-livro', JSON.stringify(livro.id)]);
     }
 
     mostraMensagens(){
@@ -51,7 +51,7 @@ export class LivroListagemComponent implements OnInit{
     }
 
     novoLivro() {
-        this.router.navigate(['/novo-livro', 0]);
+        this.router.navigate(['novo-livro', 0]);
     }
 
     converteFoto(livros: Array<LivroComponent>){
