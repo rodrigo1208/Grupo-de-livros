@@ -7,7 +7,7 @@ e compartilham informações e opiniões entre si.
 
  - Cadastro e login de usuários. - *Desenvolvido*
  - Cadastro de livros com foto. - *Desenvolvido*
- - Edição de livros e foto. - *Em Desenvolvimento*
+ - Edição de livros e foto. - *Desenvolvido*
  - Rede de amizades.
  - Opinião e nota do livro.
  - Recomendação de livros.
