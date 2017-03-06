@@ -20,10 +20,15 @@ export class LivroService {
     }  
 
     salvaLivro(livro: LivroComponent, id: string): Observable<Response>{ 
-        let idRes: string;
         console.log('salvando livro');
         return this.http
             .post('/api/livro/' + id, JSON.stringify(livro), { headers: this.headers });
+    }
+
+    atualizaLivro(livro: LivroComponent): Observable<Response> {
+        
+        return this.http
+            .put('/api/livro/' + livro.id, JSON.stringify(livro), { headers: this.headers });
     }
 
     salvaFoto(idRes: string, formData: FormData): XMLHttpRequest {

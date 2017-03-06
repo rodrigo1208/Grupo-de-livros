@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
+var foto_component_1 = require('../../foto/foto.component');
 var livro_component_1 = require('../livro.component');
 var usuario_service_1 = require('../../usuario/usuario.service');
 var livro_service_1 = require('../livro.service');
@@ -22,8 +23,10 @@ var LivroCadastroComponent = (function () {
         this.router = router;
         this.route = route;
         this.imgShow = false;
+        this.imgChanged = false;
         this.funcao = "Novo";
         this.livro = new livro_component_1.LivroComponent();
+        this.foto = new foto_component_1.FotoComponent();
         this.cadastroForm = fb.group({
             imagem: [''],
             titulo: [''],
@@ -67,6 +70,25 @@ var LivroCadastroComponent = (function () {
             }, function (error) { return console.log(error); });
         }, function (error) { return console.log(error); });
     };
+    LivroCadastroComponent.prototype.atualiza = function () {
+        var _this = this;
+        this.service
+            .atualizaLivro(this.livro)
+            .subscribe(function (res) {
+            if (!_this.imgChanged) {
+                return;
+            }
+            var xhr = _this.service.salvaFoto(res.json(), _this.formData);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status == 200 && xhr.status < 300) {
+                        console.log('Salvo com sucesso!' + xhr.responseText);
+                        _this.router.navigate(['meus-livros']);
+                    }
+                }
+            };
+        }, function (error) { return console.log(error); });
+    };
     LivroCadastroComponent.prototype.cancela = function () {
         this.router.navigate(['/meus-livros']);
     };
@@ -75,10 +97,11 @@ var LivroCadastroComponent = (function () {
         var file = event.target.files[0];
         var reader = new FileReader();
         reader.onload = function (e) {
-            _this.livro.foto.imagem = e.target.result;
-            _this.livro.foto.nomeImagem = file.name;
+            _this.foto.imagem = e.target.result;
+            _this.foto.nomeImagem = file.name;
         };
         this.imgShow = true;
+        this.imgChanged = true;
         this.formData = new FormData();
         this.formData.append('imagem', file);
         reader.readAsDataURL(file);

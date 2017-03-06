@@ -19,10 +19,13 @@ var LivroService = (function () {
         this.headerFormData.set('Accept', 'application/json');
     }
     LivroService.prototype.salvaLivro = function (livro, id) {
-        var idRes;
         console.log('salvando livro');
         return this.http
             .post('/api/livro/' + id, JSON.stringify(livro), { headers: this.headers });
+    };
+    LivroService.prototype.atualizaLivro = function (livro) {
+        return this.http
+            .put('/api/livro/' + livro.id, JSON.stringify(livro), { headers: this.headers });
     };
     LivroService.prototype.salvaFoto = function (idRes, formData) {
         console.log("salvando foto");

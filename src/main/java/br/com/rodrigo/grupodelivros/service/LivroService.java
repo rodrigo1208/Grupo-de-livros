@@ -26,6 +26,20 @@ public class LivroService extends AbstractService {
 		return livro;
 	}
 	
+	public Livro atualizaLivro(Livro livro){
+		
+		Query<Livro> updateQuery = datastore.createQuery(Livro.class).field("_id").equal(livro.getId());
+		ops = datastore.createUpdateOperations(Livro.class)
+				.set("titulo", livro.getTitulo())	 
+				.set("autor", livro.getAutor())
+				.set("categoria", livro.getCategoria())
+				.set("paginas", livro.getPaginas());
+		
+		datastore.update(updateQuery, ops);
+		return livro;
+		
+	}
+	
 	public Livro addUsuario(Livro livro, String idUsuario){
 		Query<Livro> updateQuery = datastore.createQuery(Livro.class).field("_id").equal(livro.getId());
 		ops = datastore.createUpdateOperations(Livro.class).push("idsUsuarios", idUsuario);

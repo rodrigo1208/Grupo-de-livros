@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validator } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
+import { FotoComponent } from '../../foto/foto.component';
 import { LivroComponent } from '../livro.component';
 import { UsuarioService } from '../../usuario/usuario.service';
 import { LivroService } from '../livro.service';
@@ -13,9 +14,11 @@ import { LivroService } from '../livro.service';
 export class LivroCadastroComponent implements OnInit {
 
     livro: LivroComponent;
+    foto: FotoComponent;
     cadastroForm: FormGroup;
     formData: FormData;
     imgShow: boolean = false;
+    imgChanged: boolean = false;
     funcao: string = "Novo"
 
     constructor(
@@ -25,6 +28,7 @@ export class LivroCadastroComponent implements OnInit {
             private router: Router,
             private route: ActivatedRoute){
         this.livro = new LivroComponent();
+        this.foto = new FotoComponent();
         this.cadastroForm = fb.group({
             imagem: [''],
             titulo: [''],
@@ -59,7 +63,7 @@ export class LivroCadastroComponent implements OnInit {
                  this.service.salvaLivro(this.livro, res.json())
                     .subscribe(res=> {
                         let xhr = this.service.salvaFoto(res.json(), this.formData);
-                        xhr.onreadystatechange = ()=>{
+                        xhr.onreadystatechange = () => {
                             if(xhr.readyState === 4){
                                 if(xhr.status == 200 && xhr.status < 300){
                                     console.log('Salvo com sucesso!' + xhr.responseText);
@@ -68,10 +72,27 @@ export class LivroCadastroComponent implements OnInit {
                                 }
                             }
                         };
-
                     }, error => console.log(error));
             }, error => console.log(error));
-    
+    }
+
+    atualiza() {
+        this.service
+            .atualizaLivro(this.livro)
+            .subscribe(res => {
+                if(!this.imgChanged){
+                    return;
+                }
+                let xhr = this.service.salvaFoto(res.json(), this.formData);
+                xhr.onreadystatechange = () => {
+                    if(xhr.readyState === 4){
+                        if(xhr.status == 200 && xhr.status < 300){
+                            console.log('Salvo com sucesso!' + xhr.responseText);
+                            this.router.navigate(['meus-livros']);
+                        }
+                    }
+                };
+            }, error => console.log(error));
     }
 
     cancela(){
@@ -82,11 +103,12 @@ export class LivroCadastroComponent implements OnInit {
         let file = event.target.files[0];
         let reader = new FileReader();
         reader.onload = (e: any) => {
-            this.livro.foto.imagem = e.target.result;
-            this.livro.foto.nomeImagem = file.name;
+            this.foto.imagem = e.target.result;
+            this.foto.nomeImagem = file.name;
         };
 
         this.imgShow = true;
+        this.imgChanged = true;
         this.formData = new FormData();
         this.formData.append('imagem', file);
         reader.readAsDataURL(file);

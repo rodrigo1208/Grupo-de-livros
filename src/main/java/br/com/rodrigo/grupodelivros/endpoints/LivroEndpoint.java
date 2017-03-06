@@ -31,10 +31,9 @@ public class LivroEndpoint  implements IEndpoints{
 	@Override
 	public void publish() {
 		
-		post("/api/livro/:id", "application/json", (req, res) -> {			
+		post("/api/livro/:idUsuario", "application/json", (req, res) -> {			
 			try{
-				ObjectId id = new ObjectId(req.params("id"));
-				System.out.println("id" + id);
+				ObjectId id = new ObjectId(req.params("idUsuario"));
 				Usuario usuario = (Usuario) uService.getById(Usuario.class, id);
 				
 				Livro livro = fromJson(req.body(), Livro.class);
@@ -42,6 +41,22 @@ public class LivroEndpoint  implements IEndpoints{
 				service.salva(livro);
 				uService.adicionaLivro(usuario, livro.getId().toString());
 				return livro.getId().toString();
+			}catch(Exception e){
+				e.printStackTrace();
+				return new RuntimeException();
+			}
+			
+		}, json());
+		
+		put("/api/livro/", "application/json", (req, res) -> {
+			try{
+				
+				Livro updateLivro = fromJson(req.body(), Livro.class);
+				
+				service.atualizaLivro(updateLivro);
+				
+				return updateLivro.getId().toString();
+				
 			}catch(Exception e){
 				e.printStackTrace();
 				return new RuntimeException();
